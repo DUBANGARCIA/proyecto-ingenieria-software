@@ -1,0 +1,43 @@
+name: myhealth
+recipe: laravel
+config:
+  php: '8.0'
+  composer_version: '2.2.9'
+  via: nginx
+  webroot: public
+  database: mariadb
+  cache: redis
+  xdebug: true
+services:
+  appserver:
+    overrides:
+      volumes:
+        - ./src:/app
+        - ./.git:/.git
+    build:
+      - composer install
+    run_as_root:
+      - curl -sL "https://deb.nodesource.com/setup_16.x" | bash -
+      - curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+      - echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list
+      - apt-get update -y
+      - apt-get install -y nodejs yarn nano
+      - apt-get autoremove -y
+  database:
+    portforward: 3311
+    creds:
+      user: workshow
+      password: workshow
+      database: workshow
+  cache:
+    portforward: 3313
+    persist: true
+tooling:
+  artisan:
+    service: appserver
+    description: Runs artisan commands
+    cmd: php artisan
+  yarn:
+    service: appserver
+    description: Runs yarn commands
+    cmd: yarn
