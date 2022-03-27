@@ -1,0 +1,17 @@
+.lateral-card{
+    background-color: #4BBECD;
+    height: 100vh;
+    min-height: 600px;
+}
+
+.lateral-card .lateral-card-body .option{
+    color: white;
+    padding: 5rem 3rem;
+}
+.lateral-card .lateral-card-body .option:hover{
+    background-color: white;
+    color: #4D4D4D;
+    cursor: pointer;
+    box-shadow: .2rem .2rem 2.4rem .1rem rgba(0, 0, 0, .25);
+    transform: scale(1.02)
+}
