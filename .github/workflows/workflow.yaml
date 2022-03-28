@@ -1,0 +1,68 @@
+name: Build Proyect
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - features/*
+      - release/*
+      - hotfix/*
+  pull_request:
+    branches:
+      - "develop"
+      - "staging"
+jobs:
+  deploy-front:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Front
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.14.2'
+      - name: save cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: compile app
+        run: | 
+          npm install
+          npm run deploy
+  deploy-back:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Back
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: cache php dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: dependencies-php-composer-${{ hashFiles('**/composer.lock') }}
+      - name: setup php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd
+          coverage: none
+      - name: install dependencies
+        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+  heroku-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "my-health123"
+          heroku_email: "duban162008@gmail.com"
