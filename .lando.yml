@@ -1,0 +1,61 @@
+name: myhealth
+recipe: laravel
+excludes:
+  - Front/node_modules
+config:
+  php: '8.0'
+  composer_version: '2.2.9'
+  via: nginx
+  webroot: public
+  database: postgres
+  cache: redis
+  xdebug: true
+services:
+  appserver:
+    overrides:
+      volumes:
+        - ./Back/src:/app
+        - ./.git:/.git
+    build:
+      - composer install
+    run_as_root:
+      - apt-get update -y
+      - apt-get install -y nano
+      - apt-get autoremove -y
+  database:
+    portforward: 5434
+    creds:
+      database: myhealth
+  cache:
+    portforward: 3313
+    persist: true
+  angular:
+    type: node:custom
+    overrides:
+      volumes:
+        - ./Front:/app
+        - ./.git:/.git
+      image: node:16.14.2-slim
+    build:
+      - npm install
+    run_as_root:
+      - apt-get autoremove -y
+    command: npm run start
+    port: 4200
+    ssl: true
+proxy:
+  angular:
+    - myhealth-frontend.lndo.site:4200
+tooling:
+  artisan:
+    service: appserver
+    description: Runs artisan commands
+    cmd: php artisan
+  npm:
+    service: angular
+    description: Runs npm commands
+    cmd: npm
+  ng:
+    service: angular
+    description: Runs ng commands
+    cmd: npm run ng --
