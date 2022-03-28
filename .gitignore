@@ -1,6 +1,6 @@
 ### Composer template
 composer.phar
-src2/vendor/
+vendor/
 
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
@@ -101,16 +101,16 @@ fabric.properties
 /app/spool/*
 
 # Cache, session files and logs (Symfony3)
-src2/apps/*/var/cache/*
-src2/apps/*/var/logs/*
-src2/apps/*/var/sessions/*
-!src2/apps/*/var/cache/.gitkeep
-!src2/apps/*/var/logs/.gitkeep
-!src2/apps/*/var/sessions/.gitkeep
+apps/*/var/cache/*
+apps/*/var/logs/*
+apps/*/var/sessions/*
+!apps/*/var/cache/.gitkeep
+!apps/*/var/logs/.gitkeep
+!apps/*/var/sessions/.gitkeep
 
 # Logs (Symfony4)
-src2/apps/*/var/log/*
-!src2/apps/*/var/log/.gitkeep
+apps/*/var/log/*
+!apps/*/var/log/.gitkeep
 
 # Parameters
 /app/config/parameters.yml
@@ -118,7 +118,7 @@ src2/apps/*/var/log/*
 
 # Managed by Composer
 /app/bootstrap.php.cache
-src2/apps/*/var/bootstrap.php.cache
+apps/*/var/bootstrap.php.cache
 /bin/*
 !bin/console
 !bin/symfony_requirements
