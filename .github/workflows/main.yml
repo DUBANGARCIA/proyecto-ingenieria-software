@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: Back
+        working-directory: Back/src
     steps:
       - name: checkout
         uses: actions/checkout@v2
