@@ -1,0 +1,11 @@
+.footer-card{
+    background-color: #000000;
+    min-height: 5rem;
+}
+.footer-card .footer-body{
+    display: flex;
+    justify-content: center;
+}
+.footer-card .footer-body p{
+    color: white;
+}

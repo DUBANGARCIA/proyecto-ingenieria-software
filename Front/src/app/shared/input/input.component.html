@@ -1,0 +1,19 @@
+<div class="inputs" id="input-body">
+  <form autocomplete="off" [formGroup]="form" (ngSubmit)="send()">
+    <div class=" input-body">
+      <div class="form-data">
+        <div class="inputs-data" *ngFor="let item of inputValue">
+          <div class="inputLabel">
+            <label for="">{{ item.label }}</label>
+            <input [id]="item.id"  [type]="item.type"  [formControlName]="item.form">
+          </div>
+          <span class="error-menssage" *ngIf="inputValidate(item.form)">Debes ingresar un valor valido.</span>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="save" type="submit" [disabled]="form.invalid">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

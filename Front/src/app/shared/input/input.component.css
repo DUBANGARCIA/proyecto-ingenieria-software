@@ -1,0 +1,49 @@
+ .inputs{
+    padding: 3rem 5rem;
+    transition: max-height 0.2s ease-out;
+    box-shadow: .2rem .1rem 1.4rem  rgba(0, 0, 0, .25);
+}
+.inputs .input-body{
+    display: flex;
+    flex-direction: column;
+}
+.inputs .form-data{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem;
+}
+.inputs .form-data .inputLabel{
+    display: flex;
+    flex-direction: column;
+}
+.inputs .form-data .inputLabel input{
+    border: none;
+    margin-top: 1rem;
+    border-bottom: .1rem solid black;
+    outline: none;
+    font-size: 2rem;
+    font-weight: 700;
+}
+.inputs .form-data .inputLabel label{
+    font-size: 1.7rem;
+}
+
+.buttons{
+    align-self:flex-end;
+    margin-top: 3rem;
+}
+.buttons button{
+    padding: 1rem 5rem;
+    margin-right: 2rem;
+    background-color: white;
+    font-weight: 800;
+    border: .1rem solid ;
+}
+.buttons button:hover{
+    box-shadow: .2rem .1rem 1.4rem  rgba(0, 0, 0, .25);
+    cursor: pointer;
+    transform: scale(1.02);
+}
+.buttons button:last-of-type{
+    margin-right: 0;
+}

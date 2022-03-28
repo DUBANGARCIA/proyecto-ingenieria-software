@@ -1,0 +1,33 @@
+<app-table 
+    [myDataArray]="element_data"
+    [dataColumn]="columns"
+ ></app-table>
+
+<div class="add-card-accordion">
+  <div class="content-add" (click)="add()">
+    <img src="./assets/img/add.png" alt="">
+  </div>
+</div>
+
+<div class="accordion-card" *ngIf="mostrarCard">
+  <div class="accordion-card-content" >
+    <div class="accordion-header shadow">
+      <div class="title-done">
+         <h2>{{title}}</h2>
+      </div>
+      <div class="icon-accordion" (click)="desplegar()">
+          <img [src]="imgFlecha" alt="">
+      </div>
+    </div>
+    <app-input
+    [inputValue]="inputValue"
+    [enableButtonInput]="enableButtonInput"
+    [data] = "cards"
+    [idC]="idComponent"
+    (enviarDatePadre)="recibirDatos($event)"
+    *ngIf="mostrarBodyAcco">
+    </app-input>
+  </div>
+
+</div>
+ 
