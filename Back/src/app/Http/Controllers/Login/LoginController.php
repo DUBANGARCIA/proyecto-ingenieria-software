@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
-use Flugg\Responder\Responder;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function login(Request $request, Responder $responder)
+    public function login(Request $request)
     {
         $this->validateLogin($request);
         $credentials = [
@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         return response()->json([
             'data' => [
-                'token'   => $request->user()->createToken($request->username)->plainTextToken,
+                'token'   => $request->user()->createToken($request->get('email'))->plainTextToken,
                 'message' => 'Success',
             ],
             'status' => 200,
@@ -45,6 +45,29 @@ class LoginController extends Controller
         return $request->validate([
             'username'    => 'required|email',
             'password' => 'required'
+        ]);
+    }
+
+    public function register(Request $request) {
+        $request->validate([
+            'first_name'    => 'required',
+            'last_name' => 'required',
+            'gender' => 'required',
+            'age' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = User::create($request->only(['first_name', 'last_name', 'gender', 'age', 'email', 'password']));
+        Auth::login($user);
+
+        return response()->json([
+            'data' => [
+                'token'   => $request->user()->createToken($request->get('email'))->plainTextToken,
+                'message' => 'Success',
+            ],
+            'status' => 200,
+            'error' => []
         ]);
     }
 }

@@ -17,11 +17,8 @@ services:
     build:
       - composer install
     run_as_root:
-      - curl -sL "https://deb.nodesource.com/setup_16.x" | bash -
-      - curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
-      - echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list
       - apt-get update -y
-      - apt-get install -y nodejs yarn nano
+      - apt-get install -y nano
       - apt-get autoremove -y
   database:
     portforward: 5434
@@ -30,6 +27,23 @@ services:
   cache:
     portforward: 3313
     persist: true
+  angular:
+    type: node:custom
+    overrides:
+      volumes:
+        - ./Front:/app
+        - ./.git:/.git
+      image: node:16.14.2-slim
+    build:
+      - npm install
+    run_as_root:
+      - apt-get autoremove -y
+    command: npm run start
+    port: 4200
+    ssl: true
+proxy:
+  angular:
+    - myhealth-frontend.lndo.site:4200
 tooling:
   artisan:
     service: appserver
