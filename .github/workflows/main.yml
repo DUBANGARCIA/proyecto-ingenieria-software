@@ -31,6 +31,24 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: save cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-${{ env.cache-name }}-
+            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-
+      - name: save cache compilation
+        uses: actions/cache@v3
+        with:
+          path: .angular
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: compile app
         run: | 
           npm install
