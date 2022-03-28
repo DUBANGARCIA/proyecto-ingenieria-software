@@ -1,0 +1,9 @@
+<div class="lateral-card">
+    <div class="lateral-card-body">
+        <div class="option" *ngFor="let item of optionsNav; let index = index;"  [routerLink] = "item.router">
+            <p class="no-margin">
+                {{ item.title }}
+            </p>
+        </div>
+    </div>
+</div>
