@@ -5,14 +5,14 @@ config:
   composer_version: '2.2.9'
   via: nginx
   webroot: public
-  database: mariadb
+  database: postgres
   cache: redis
   xdebug: true
 services:
   appserver:
     overrides:
       volumes:
-        - ./src:/app
+        - ./Back/src:/app
         - ./.git:/.git
     build:
       - composer install
@@ -24,11 +24,9 @@ services:
       - apt-get install -y nodejs yarn nano
       - apt-get autoremove -y
   database:
-    portforward: 3311
+    portforward: 5434
     creds:
-      user: workshow
-      password: workshow
-      database: workshow
+      database: myhealth
   cache:
     portforward: 3313
     persist: true
