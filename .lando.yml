@@ -5,7 +5,7 @@ config:
   composer_version: '2.2.9'
   via: nginx
   webroot: public
-  database: mariadb
+  database: postgres
   cache: redis
   xdebug: true
 services:
@@ -26,9 +26,9 @@ services:
   database:
     portforward: 3311
     creds:
-      user: workshow
-      password: workshow
-      database: workshow
+      user: myhealth
+      password: postgres
+      database: myhealth
   cache:
     portforward: 3313
     persist: true
