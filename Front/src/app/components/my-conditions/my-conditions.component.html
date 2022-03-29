@@ -1,8 +1,37 @@
-<app-accordion 
-    [element_data]="element_data"
-    [columns]="columns"
-    [title]="title"
+<app-nav></app-nav>
+<div class="container-main-info">
+  <div class="col-3">
+    <app-lateral-nav>
+    </app-lateral-nav>
+  </div>
+  <div class="col-9">
+    <div class="filter">
+      <div class="user">
+        <mat-form-field appearance="fill">
+          <mat-label>Beneficiarios</mat-label>
+          <mat-select (selectionChange)="select($event)">
+            <mat-option *ngFor="let food of foods" [value]="food.value" >
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="mensajeConfirmacion" *ngIf="mostrarMensaje">
+      <div class="bodymensaje">
+        <p>{{mensajeConfirmacion}}</p>
+      </div>
+    </div>
+    
+    <app-accordion 
+    *ngIf="mostrarTable"
+    [elements]="element_data"
+    [columns]="columns" 
+    [title]="title" 
     [idComponent]="idComponent"
-    [inputValue]="inputValue">
-</app-accordion>
-
+    [inputValue]="inputValue"
+    (enviarDatos)="recibirDatos($event)">
+    </app-accordion>
+  </div>
+</div>
+ 

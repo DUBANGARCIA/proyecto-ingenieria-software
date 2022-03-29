@@ -66,3 +66,13 @@ html {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.message{
+  text-align: center;
+  background-color: #EE656F;
+  color: white;
+  padding: 2rem 0;
+}
+.spiner{
+  display: flex;
+  justify-content: center;
+}

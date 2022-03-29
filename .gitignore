@@ -245,7 +245,8 @@ GitHub.sublime-settings
 
 # dependencies
 /node_modules
-
+/.node_modules
+./node_modules
 # profiling files
 chrome-profiler-events*.json
 
@@ -268,7 +269,9 @@ chrome-profiler-events*.json
 
 # misc
 /.angular/cache
+./angular/cache
 /.sass-cache
+./.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log

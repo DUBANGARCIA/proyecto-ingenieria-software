@@ -1,0 +1,43 @@
+<div class="body-login">
+    <form action="" [formGroup]="form" (ngSubmit)="registrar()">
+    <div class="bodys">
+        <div class="logoSpace">
+            <img src="./assets/img/Logo.png" alt="">
+        </div>
+        <div class="form-login">
+            <div class="form">
+                <div class="spiner" *ngIf="mostrarSpiner">
+                     <mat-progress-spinner color="primary" mode="indeterminate">
+                    <!-- <mat-spinner ></mat-spinner> -->
+                    </mat-progress-spinner>
+                </div>
+
+                <div class="message" *ngIf="mostrarMensaje">
+                    <p>{{ menssage }}</p>
+                </div>
+                <div class="inputs">
+                    <input type="text" name="" id="user" placeholder="Nombres:" formControlName = "name">
+                    <input type="text" name="" id="lastname" placeholder="Apellidos:" formControlName = "lastname">
+                    <input type="text" name="" id="genere" placeholder="Genero:" formControlName = "genere">
+                    <input type="number" name="" id="age" placeholder="Edad:" formControlName = "age">
+                    <input type="email" name="" id="email" placeholder="Correo:" formControlName = "email">
+                    <input type="password" name="" id="pass" placeholder="Clave:" formControlName = "pass">
+                </div>
+                <div class="button">
+                    <button type="submit">Entrar</button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="card login-in" (click)="irTo()">
+                    <img src="./assets/img/user.png" alt="">
+                    <span>Entrar</span>
+                </div>
+                <div class="card register">
+                    <img src="./assets/img/register.png" alt="">
+                    <span>Registrarme</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
