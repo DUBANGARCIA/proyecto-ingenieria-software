@@ -22,7 +22,7 @@ class BeneficiaryController extends Controller
         ]);
     }
 
-    public function save(Request $request) {
+    public function save($id, Request $request) {
         $user = $request->user();
         $request->validate([
             'first_name'    => 'required',
@@ -39,7 +39,14 @@ class BeneficiaryController extends Controller
             ]
         );
 
-        $beneficiary = Beneficiary::create($data);
+        $beneficiary = Beneficiary::firstOrCreate(
+            [
+                'id' => $id,
+            ],
+            $data
+        );
+
+        $beneficiary->update($data);
 
         return response()->json([
             'data' => [
