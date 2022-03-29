@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         return response()->json([
             'data' => [
-                'token'   => $request->user()->createToken($request->get('email'))->plainTextToken,
+                'token'   => $request->user()->createToken($request->get('username'))->plainTextToken,
                 'message' => 'Success',
             ],
             'status' => 200,
