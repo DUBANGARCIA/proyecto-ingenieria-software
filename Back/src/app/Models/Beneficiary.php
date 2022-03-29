@@ -17,6 +17,7 @@ class Beneficiary extends Model
         'gender',
         'age',
         'email',
+        'parent_id'
     ];
 
     /**

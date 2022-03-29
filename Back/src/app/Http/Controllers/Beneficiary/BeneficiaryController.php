@@ -21,4 +21,32 @@ class BeneficiaryController extends Controller
             'error' => []
         ]);
     }
+
+    public function save(Request $request) {
+        $user = $request->user();
+        $request->validate([
+            'first_name'    => 'required',
+            'last_name' => 'required',
+            'gender' => 'required',
+            'age' => 'required',
+            'email' => 'required',
+        ]);
+
+        $data = array_merge(
+            $request->only(['first_name', 'last_name', 'gender', 'age', 'email']),
+            [
+                'parent_id' => $user->id,
+            ]
+        );
+
+        $beneficiary = Beneficiary::create($data);
+
+        return response()->json([
+            'data' => [
+                'message' => 'success'
+            ],
+            'status' => 200,
+            'error' => []
+        ]);
+    }
 }
