@@ -15,6 +15,7 @@ class BeneficiaryController extends Controller
 
         $beneficiaries = Beneficiary::where('parent_id', $user->id)->get()->toArray();
 
+
         return response()->json([
             'data' => $beneficiaries,
             'status' => 200,
