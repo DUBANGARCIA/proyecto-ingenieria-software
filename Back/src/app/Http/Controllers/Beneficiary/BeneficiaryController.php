@@ -15,6 +15,18 @@ class BeneficiaryController extends Controller
 
         $beneficiaries = Beneficiary::where('parent_id', $user->id)->get()->toArray();
 
+        $beneficiaries = array_map(function ($item) {
+            $newItem = [
+               'Id' => $item['id'],
+                'Nombres' => $item['first_name'],
+                'Apellidos' => $item['last_name'],
+                'Genero' => $item['gender'],
+                'Edad' => $item['age'],
+                'Correo' => $item['email'],
+            ];
+
+            return $newItem;
+        }, $beneficiaries);
 
         return response()->json([
             'data' => $beneficiaries,
