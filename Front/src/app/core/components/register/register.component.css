@@ -1,0 +1,81 @@
+
+.body-login{
+
+    padding: 10rem 0;
+}
+.body-login .bodys{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.body-login .bodys .logoSpace{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.body-login .bodys .logoSpace img{
+    height: 20rem;
+}
+.body-login .bodys .form-login{
+    background-color: #7AE3F1;
+}
+
+.body-login .bodys .form-login .form{
+
+    background-color: white;
+    margin: 3rem 5rem;
+    padding: 2rem;
+}
+.body-login .bodys .form-login .form .inputs{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+.body-login .bodys .form-login .form .inputs input{
+    margin-top: 5rem;
+    font-size: 2rem;
+    border: none;
+    border-bottom: .1rem black solid;
+    outline: none;
+}
+.body-login .bodys .form-login .form .button{
+    margin: 5rem;
+}
+.body-login .bodys .form-login .form .button button{
+    display: block;
+    width: 100%;
+    padding: 2rem;
+    background-color: #ABD28B;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.body-login .bodys .form-login .form .button button:hover{
+    background-color: #8DBA68;
+
+}
+.body-login .bodys .options{
+    background-color: white;
+    margin: 3rem 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2rem 0;
+    font-size: 1.8rem;
+}
+
+.body-login .bodys .options .card{
+    padding: 2rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.body-login .bodys .options .card img{
+    width: 5rem;
+    height: 5rem;
+}
+.body-login .bodys .options .card:hover{
+    box-shadow: .2rem .2rem 2.4rem .1rem rgba(0, 0, 0, .25);
+    
+}
