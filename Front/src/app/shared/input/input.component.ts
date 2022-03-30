@@ -32,26 +32,23 @@ export class InputComponent implements OnInit {
   public datosTable;
 
   constructor(private comunicator: ComunicationService,
-    public fb: FormBuilder) {
+    public fb: FormBuilder,
+    private ruta: ActivatedRoute) {
     this.enviarDatePadre = new EventEmitter();
   }
 
   ngOnInit(): void {
     
     console.log(this.idC);
-    if (Number(this.idC) == 0) {
-      this.loadInput();
-    }else{
+    if (Number(this.idC) == 1) {
       this.loadInputCondition()
+    }else{
+      this.loadInput();
     }
 
     this.comunicator.enviarMenesajeObservable.subscribe(response=>{
       this.datosTable = response;
-      if (Number(this.idC) == 0) {
-        this.settInputs()
-      }else{
-        this.settInputsCondition()
-      }
+      this.settInputs()
     })
   }
   settInputs(){
@@ -64,16 +61,6 @@ export class InputComponent implements OnInit {
     id:this.datosTable.Id,
    })
   }
-  settInputsCondition(){
-    this.form.patchValue({
-      condicion:this.datosTable.Condicion,
-     fechaD:this.datosTable.Fecha,
-     medicina:this.datosTable.Medicamentos,
-     nAplic:this.datosTable.aplicaciones,
-     notas:this.datosTable.Notas,
-     id:this.datosTable.id,
-    })
-   }
   loadInputCondition(){
     this.form = this.fb.group({
       condicion:['',Validators.compose([
@@ -90,6 +77,10 @@ export class InputComponent implements OnInit {
       nAplic:['',Validators.compose([
         Validators.required,
         Validators.pattern(PATTERNS.onlyNumbers),
+      ])],
+      textarea:['',Validators.compose([
+        Validators.required,
+        Validators.pattern(PATTERNS.email),
       ])],
       id:['',Validators.compose([
         Validators.required,
@@ -127,37 +118,23 @@ export class InputComponent implements OnInit {
         Validators.pattern(PATTERNS.onlyNumbers),
       ])],
     })
-  } 
-
+  }
   inputValidate(formValue){
     return this.form.get(formValue).invalid && this.form.get(formValue).touched;
   }
-
   enable(){
     this.enableButtonInput = true;
   }
-
   send(){
-    let valores;
-    if (Number(this.idC) == 0){
-      valores = {
-        Id: Number(this.form.get("id").value),
-        Nombres: this.form.get("name").value,
-        Apellidos: this.form.get("lastname").value, 
-        Genero:this.form.get("genere").value, 
-        Edad: Number(this.form.get("age").value), 
-        Correo: this.form.get("email").value
-      };
-    }else{
-      valores = {
-        id:this.form.get("id").value,
-        condicion:this.form.get("condicion").value,
-        fechaD:this.form.get("fechaD").value,
-        medicamentos:this.form.get("medicina").value,
-        nAplicacion:this.form.get("nAplic").value,
-        notas:this.form.get("notas").value
-      }
-    }
+    let valores = {
+      Id: Number(this.form.get("id").value),
+      Nombres: this.form.get("name").value,
+      Apellidos: this.form.get("lastname").value, 
+      Genero:this.form.get("genere").value, 
+      Edad: Number(this.form.get("age").value), 
+      Correo: this.form.get("email").value
+    };
+    
     this.enviarDatePadre.emit(valores);
   }
 

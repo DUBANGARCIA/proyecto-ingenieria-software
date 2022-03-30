@@ -5,7 +5,7 @@
         <div class="inputs-data" *ngFor="let item of inputValue">
           <div class="inputLabel">
             <label for="">{{ item.label }}</label>
-            <input [id]="item.id" [type]="item.type"  [formControlName]="item.form">
+            <input [id]="item.id"  [type]="item.type"  [formControlName]="item.form">
           </div>
           <span class="error-menssage" *ngIf="inputValidate(item.form)">Debes ingresar un valor valido.</span>
         </div>

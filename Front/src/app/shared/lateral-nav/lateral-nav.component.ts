@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { LATERAL_NAV } from 'src/app/core/Constantes';
 
 @Component({
@@ -11,11 +10,9 @@ export class LateralNavComponent implements OnInit {
 
   public optionsNav: any[] = LATERAL_NAV;
 
-  constructor( private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-  redirigir(valores: string[]){
-    this.router.navigate(valores);
-  }
+
 } 

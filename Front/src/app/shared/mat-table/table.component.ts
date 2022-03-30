@@ -18,11 +18,9 @@ export interface PeriodicElement {
 
 export class TableComponent implements OnInit {
 
-  @Input() set myDataArray(elements){
-    this.dataSource = [...elements]
-  }
+  @Input() myDataArray: any[] = []
   @Input() dataColumn: any[] = [];
-  public dataSource: any[] = [];
+  public dataSource: any[] = [{Id:2, Nombres: "Ds"}];
   public displayedColumns: any[] = [];
   public datosEditar;
   public selected: boolean = false;
