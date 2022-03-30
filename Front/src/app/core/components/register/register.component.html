@@ -12,7 +12,7 @@
                     </mat-progress-spinner>
                 </div>
 
-                <div class="message" *ngIf="mostrarMensaje">
+                <div [class]="messageStyle" *ngIf="mostrarMensaje">
                     <p>{{ menssage }}</p>
                 </div>
                 <div class="inputs">

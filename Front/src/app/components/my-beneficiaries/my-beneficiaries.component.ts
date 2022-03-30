@@ -19,6 +19,7 @@ export class MyBeneficiariesComponent implements OnInit {
   public idComponent;
   public mensajeConfirmacion = "";
   public mostrarMensaje: boolean = false;
+  public mostrarSpiner = false;
 
   constructor(private ruta: ActivatedRoute,
     private beneficiaries: MyBeneficiariesService) { 
@@ -43,6 +44,7 @@ export class MyBeneficiariesComponent implements OnInit {
       });
   }
   recibirDatos(valores) {
+    this.mostrarSpiner = true;
     let valoresAEnviar = {
       beneficiaryId: valores[0].Id,
       first_name: valores[0].Nombres,
@@ -50,21 +52,23 @@ export class MyBeneficiariesComponent implements OnInit {
       gender: valores[0].Genero,
       age: valores[0].Edad,
       email: valores[0].Correo
-    }
+    };
     setTimeout(() => {
       let token = localStorage.getItem("token")
       this.beneficiaries.setBeneficiaries(valoresAEnviar, token).pipe(
         finalize(() => {
-          // this.mostrarSpiner = false;
+          this.mostrarSpiner = false;
         })).subscribe((response) => {
-            this.mostrarMensaje = true;
-            this.mensajeConfirmacion = "Datos Registrados."
+          this.mensajeConfirmacion = "Datos Registrados."
+          this.mostrarMensaje = true;
           console.log(response);
         }, (error: HttpErrorResponse) => {
           console.log(error)
         });
     }, 3000);
-    // location.reload();
+    setTimeout(()=>{
+      location.reload();
+    }, 5000)
     console.log(valoresAEnviar);
   }
 

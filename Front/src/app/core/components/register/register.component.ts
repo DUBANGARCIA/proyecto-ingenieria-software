@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
   public form: FormGroup;
   public menssage: string = "";
   public mostrarSpiner = false;
-  
+  public messageStyle = "";
+
   constructor(public fb: FormBuilder, private router: Router, private save: SaveDataService) { }
  
   ngOnInit(): void {
@@ -39,10 +40,12 @@ export class RegisterComponent implements OnInit {
           finalize(()=>{
             this.mostrarSpiner = false;
           })).subscribe((response)=>{
+            this.messageStyle = "messageSucess";
             this.menssage = "Se registraron los datos correctamente."
             this.mostrarMensaje = true;
             console.log(response);
           }, (error:HttpErrorResponse)=>{
+            this.messageStyle = "messageError";
             this.menssage = "Ups! ocurrio un error, no pudimos almacenar tu información"
             this.mostrarMensaje = true;
             console.log(error)

@@ -10,7 +10,11 @@
         <p>{{mensajeConfirmacion}}</p>
       </div>
     </div>
-
+    <div class="spiner" *ngIf="mostrarSpiner">
+      <mat-progress-spinner color="primary" mode="indeterminate">
+     <!-- <mat-spinner ></mat-spinner> -->
+     </mat-progress-spinner>
+    </div>
     <app-accordion [elements]="element_data" [columns]="columns" [title]="title" [idComponent]="idComponent" [inputValue]="inputValue" (enviarDatos)="recibirDatos($event)">
     </app-accordion>
   </div>
