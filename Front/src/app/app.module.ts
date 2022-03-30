@@ -16,6 +16,12 @@ import { TableComponent } from './shared/mat-table/table.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { GetValuePipe } from './shared/pipes/get-value.pipe';
 import { MyConditionsComponent } from './components/my-conditions/my-conditions.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoginComponent } from './core/components/login/login.component';
+import { RegisterComponent } from './core/components/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './core/components/home/home.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -29,6 +35,9 @@ import { MyConditionsComponent } from './components/my-conditions/my-conditions.
     TableComponent,
     GetValuePipe,
     MyConditionsComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
   
   ],
   imports: [
@@ -39,6 +48,9 @@ import { MyConditionsComponent } from './components/my-conditions/my-conditions.
     BrowserAnimationsModule,
     MatTableModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
+    HttpClientModule,
+    MatSelectModule
     
   ],
   exports:[TableComponent],

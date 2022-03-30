@@ -21,7 +21,7 @@ export const INPUTS_DATA: any = [
     },
     {
         label:"Genero:",
-        type:"select",
+        type:"text",
         form: "genere",
         id:"genere",
     },
@@ -71,7 +71,7 @@ export const INPUTS_CONDITION: any = [
     },
     {
         label:"Notas importantes",
-        type:"textarea",
+        type:"text",
         form: "notas",
         id:"notas",
     }
