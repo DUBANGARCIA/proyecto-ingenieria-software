@@ -14,6 +14,7 @@ class BeneficiaryController extends Controller
     public function list(Request $request) {
         $user = $request->user();
         Log::debug($user->id);
+        Log::debug($user->full_name);
         $beneficiaries = Beneficiary::where('parent_id', $user->id)->get()->toArray();
 
         $beneficiaries = array_map(function ($item) {
