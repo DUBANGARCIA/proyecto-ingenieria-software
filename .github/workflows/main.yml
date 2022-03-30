@@ -50,6 +50,8 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: compile app
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: | 
           npm install
           npm run deploy

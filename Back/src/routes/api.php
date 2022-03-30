@@ -15,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login', [\App\Http\Controllers\Login\LoginController::class, 'login']);
-
 Route::post('/register', [\App\Http\Controllers\Login\LoginController::class, 'register']);
+
+
+Route::get('/beneficiaries', [\App\Http\Controllers\Beneficiary\BeneficiaryController::class, 'list'])
+    ->middleware('auth:sanctum');
+Route::post('/beneficiaries/{beneficiaryId}', [\App\Http\Controllers\Beneficiary\BeneficiaryController::class, 'save'])
+     ->middleware('auth:sanctum');

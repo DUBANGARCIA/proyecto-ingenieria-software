@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { INPUTS_DATA } from '../constants/input-data';
 import { DISPLAY_COLUMN } from '../constants/table-column';
+import { ComunicationService } from '../services/comunication/comunication.service';
 
 @Component({
   selector: 'app-accordion',
@@ -24,18 +25,22 @@ export class AccordionComponent implements OnInit {
   public validation: boolean = false;
   public imgFlecha: string = "./assets/img/right-arrow.png"; 
   public mostrarBodyAcco: boolean = false;
-  private datosInsertados: any;
-  @Input() element_data: any[];
+  private datosInsertados: any[] = [];
+  public element_data;
+  @Input() set elements(elementos){
+    this.element_data = [...elementos];
+  }
   @Input() columns;
   @Input() title;
   @Input() inputValue ;
   @Input() idComponent;
+  @Output() enviarDatos: EventEmitter<any>
+  public mostrarCard = false;;
+  @Input() mensajeConfirmacion;
+  public mostrarMensaje: boolean = false;
 
-  public mostrarCard;
- 
-  
-
-  constructor() {
+  constructor(private comunicator: ComunicationService) {
+    this.enviarDatos = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -70,8 +75,11 @@ export class AccordionComponent implements OnInit {
     this.mostrarCard = true;
   }
   recibirDatos(valores){
-    this.datosInsertados = valores;
-    this.element_data.push(valores);
-    console.log(this.element_data);
+    this.element_data = [valores];
+    this.mostrarMensaje = true;
+    setTimeout(()=>{
+      this.mostrarMensaje = false;
+      this.enviarDatos.emit(this.element_data)
+    },3000)
   }
 }
