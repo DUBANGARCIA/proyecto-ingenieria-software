@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('health_conditions', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->string('drug');
             $table->timestamps();
         });
     }
